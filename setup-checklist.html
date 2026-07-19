@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stadium AI Copilot - Setup Checklist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 18px;
+        }
+        
+        .status {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+        
+        .status h2 {
+            color: #16a34a;
+            margin-bottom: 10px;
+        }
+        
+        .status-url {
+            font-family: monospace;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        
+        .status-url a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .status-url a:hover {
+            text-decoration: underline;
+        }
+        
+        .steps {
+            padding: 0 20px 20px;
+        }
+        
+        .step {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+        
+        .step.completed {
+            background: #f0fdf4;
+            border-color: #22c55e;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+        
+        .step.completed .step-number {
+            background: #22c55e;
+        }
+        
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .step-badge {
+            margin-left: auto;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-required {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .badge-recommended {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+        
+        .step-content {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .step-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+        
+        .checkbox-wrapper {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        
+        .checkbox-label:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .checkbox-label input {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+        
+        .footer {
+            background: #f9fafb;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #22c55e 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 12px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Stadium AI Copilot</h1>
+            <p>Setup Checklist</p>
+        </div>
+        
+        <div class="status">
+            <h2>✅ Deployment Successful!</h2>
+            <p>Your app is live and running on 100% Google Cloud infrastructure.</p>
+            <div class="status-url">
+                🌐 <a href="https://stadium-ai-copilot-01.web.app" target="_blank">https://stadium-ai-copilot-01.web.app</a>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress" style="width: 80%"></div>
+            </div>
+            <p id="progress-text" style="margin-top: 10px; font-weight: 600;">Progress: 80% Complete</p>
+        </div>
+        
+        <div class="steps">
+            <div class="step completed">
+                <div class="step-header">
+                    <div class="step-number">✓</div>
+                    <div class="step-title">Cloud Run Deployed</div>
+                    <span class="step-badge badge-required">COMPLETED</span>
+                </div>
+                <div class="step-content">
+                    Your Next.js app is running on Cloud Run with all environment variables configured.
+                    All 11 environment variables including GEMINI_API_KEY and FIREBASE_SERVICE_ACCOUNT_B64 are set.
+                </div>
+                <div class="step-actions">
+                    <a href="https://console.cloud.google.com/run/detail/us-central1/stadium-ai-copilot" target="_blank" class="btn btn-secondary">View Cloud Run</a>
+                </div>
+            </div>
+            
+            <div class="step" id="step1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Add Firebase Auth Authorized Domains</div>
+                    <span class="step-badge badge-required">REQUIRED</span>
+                </div>
+                <div class="step-content">
+                    <p><strong>Time:</strong> 2 minutes</p>
+                    <p><strong>Why:</strong> Without this, users cannot login or register. Firebase will block all authentication requests.</p>
+                    
+                    <h4 style="margin: 16px 0 8px 0; color: #1f2937;">Instructions:</h4>
+                    <ol style="margin-left: 20px; line-height: 2;">
+                        <li>Click "Open Firebase Auth Settings" below</li>
+                        <li>Scroll to "Authorized domains" section</li>
+                        <li>Click "Add domain" and add each of these:</li>
+                    </ol>
+                    
+                    <div class="code-block">stadium-ai-copilot-01.web.app</div>
+                    <div class="code-block">stadium-ai-copilot-01.firebaseapp.com</div>
+                    <div class="code-block">stadium-ai-copilot-ryqidae4iq-uc.a.run.app</div>
+                </div>
+                <div class="step-actions">
+                    <a href="https://console.firebase.google.com/project/stadium-ai-copilot-01/authentication/settings" target="_blank" class="btn btn-primary">Open Firebase Auth Settings</a>
+                </div>
+                <div class="checkbox-wrapper">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check1" onchange="updateProgress()">
+                        <span>I have added all 3 authorized domains</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="step" id="step2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Set Budget Alert</div>
+                    <span class="step-badge badge-recommended">RECOMMENDED</span>
+                </div>
+                <div class="step-content">
+                    <p><strong>Time:</strong> 3 minutes</p>
+                    <p><strong>Why:</strong> Protect yourself from unexpected charges. Get email alerts before costs increase.</p>
+                    
+                    <h4 style="margin: 16px 0 8px 0; color: #1f2937;">Recommended Settings:</h4>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li>Budget Amount: ₹2000/month ($25 USD)</li>
+                        <li>Alerts at: 50%, 90%, 100%</li>
+                        <li>Expected Cost: ₹400-1300/month ($5-15)</li>
+                    </ul>
+                </div>
+                <div class="step-actions">
+                    <a href="https://console.cloud.google.com/billing/budgets?project=stadium-ai-copilot-01" target="_blank" class="btn btn-primary">Create Budget Alert</a>
+                </div>
+                <div class="checkbox-wrapper">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check2" onchange="updateProgress()">
+                        <span>I have set up budget alerts</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="step" id="step3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Test Your Application</div>
+                    <span class="step-badge" style="background: #dbeafe; color: #2563eb;">TESTING</span>
+                </div>
+                <div class="step-content">
+                    <p><strong>Time:</strong> 5 minutes</p>
+                    <p><strong>What to test:</strong></p>
+                    
+                    <ul style="margin: 12px 0 12px 20px; line-height: 2;">
+                        <li>Landing page loads with animations ✓ (Already working!)</li>
+                        <li>Register new account</li>
+                        <li>Login with credentials</li>
+                        <li>Dashboard shows Firestore data</li>
+                        <li>AI features work (Analyze, Briefing, Simulator)</li>
+                    </ul>
+                </div>
+                <div class="step-actions">
+                    <a href="https://stadium-ai-copilot-01.web.app" target="_blank" class="btn btn-primary">Open Your App</a>
+                    <a href="https://console.firebase.google.com/project/stadium-ai-copilot-01/firestore" target="_blank" class="btn btn-secondary">View Firestore Data</a>
+                </div>
+                <div class="checkbox-wrapper">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check3" onchange="updateProgress()">
+                        <span>App is working and all features tested</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3 style="margin-bottom: 10px;">📚 Documentation</h3>
+            <p style="color: #6b7280; margin-bottom: 20px;">
+                For detailed instructions, see these files in your project:
+            </p>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <span style="padding: 6px 12px; background: white; border-radius: 6px; border: 1px solid #e5e7eb;">📄 MANUAL_STEPS.md</span>
+                <span style="padding: 6px 12px; background: white; border-radius: 6px; border: 1px solid #e5e7eb;">📄 DEPLOYMENT_COMPLETE.md</span>
+                <span style="padding: 6px 12px; background: white; border-radius: 6px; border: 1px solid #e5e7eb;">📄 QUICK_LINKS.md</span>
+            </div>
+            <p style="margin-top: 20px; color: #9ca3af; font-size: 14px;">
+                Deployed on July 19, 2026 at 11:52 PM IST
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateProgress() {
+            const check1 = document.getElementById('check1').checked;
+            const check2 = document.getElementById('check2').checked;
+            const check3 = document.getElementById('check3').checked;
+            
+            let completed = 80; // Base progress
+            if (check1) completed += 10;
+            if (check2) completed += 5;
+            if (check3) completed += 5;
+            
+            document.getElementById('progress').style.width = completed + '%';
+            document.getElementById('progress-text').textContent = 'Progress: ' + completed + '% Complete';
+            
+            if (check1) {
+                document.getElementById('step1').classList.add('completed');
+            }
+            if (check2) {
+                document.getElementById('step2').classList.add('completed');
+            }
+            if (check3) {
+                document.getElementById('step3').classList.add('completed');
+            }
+            
+            if (completed === 100) {
+                alert('🎉 Congratulations! Your Stadium AI Copilot is fully set up and ready to use!');
+            }
+        }
+    </script>
+</body>
+</html>
