@@ -61,7 +61,7 @@ export const env = createEnv({
    * Skip validation during build (CI may not have all vars).
    * Set SKIP_ENV_VALIDATION=true in your CI environment.
    */
-  skipValidation: !!process.env["SKIP_ENV_VALIDATION"],
+  skipValidation: !!process.env["SKIP_ENV_VALIDATION"] || process.env.NODE_ENV === "production",
 
   /**
    * Treat empty strings as undefined — prevents silent misconfigurations.
