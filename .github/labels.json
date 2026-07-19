@@ -1,0 +1,32 @@
+[
+  {
+    "name": "bug",
+    "color": "d73a4a",
+    "description": "Something isn't working"
+  },
+  {
+    "name": "enhancement",
+    "color": "a2eeef",
+    "description": "New feature or request"
+  },
+  {
+    "name": "documentation",
+    "color": "0075ca",
+    "description": "Improvements or additions to documentation"
+  },
+  {
+    "name": "good first issue",
+    "color": "7057ff",
+    "description": "Good for newcomers"
+  },
+  {
+    "name": "ai-integration",
+    "color": "0e8a16",
+    "description": "Related to Vertex AI and Cloud Functions"
+  },
+  {
+    "name": "a11y",
+    "color": "fbca04",
+    "description": "Accessibility improvements"
+  }
+]
